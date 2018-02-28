@@ -15,8 +15,9 @@ def make_scale( x, y, z ):
     m[3]=[0,0,0,1]
     return m
 
-def make_rotX( theta ):    
-    pass
+def make_rotX( theta ):
+    rad=math.radians(theta) ##angle in radians
+    cosa=math.cos(rad)
 
 def make_rotY( theta ):
     pass
