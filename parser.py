@@ -32,4 +32,14 @@ The file follows the following format:
 See the file script for an example of the file format
 """
 def parse_file( fname, points, transform, screen, color ):
-    pass
+    f=open(fname,"r")
+    lines=f.readlines()
+    for line in lines:
+        indexOfLine=lines.index(line)
+        if line=="line":
+            nextLine=lines[indexOfLine+1]
+            args=nextLine.split()
+            #for arg in args:
+            #add_edge(
+
+#p("script")
