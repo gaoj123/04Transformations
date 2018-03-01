@@ -39,7 +39,6 @@ def parse_file( fname, points, transform, screen, color ):
         if line=="line":
             nextLine=lines[indexOfLine+1]
             args=nextLine.split()
-            #for arg in args:
-            #add_edge(
+            add_edge(points,args[0],args[1],args[2],args[3],args[4],args[5])
 
 #p("script")
