@@ -40,11 +40,18 @@ def parse_file( fname, points, transform, screen, color ):
         if done==True:
             break
         indexOfLine=i
-        line=lines[i].strip("\n")
+        for l in lines:
+            lines[lines.index(l)]=l.strip("\n")
+        #print lines
+        line=lines[i]
+        #line=lines[i].strip("\n")
         #indexOfLine=lines.index(line)
         if line=="line":
             nextLine=lines[indexOfLine+1] ##get arguments
             args=nextLine.split()  ##split arguments by space
+            for a in args:
+                if a.isdigit():
+                    args[args.index(a)]=int(a)
             add_edge(points,args[0],args[1],args[2],args[3],args[4],args[5])
             i+=2
         elif line=="ident":
@@ -53,18 +60,27 @@ def parse_file( fname, points, transform, screen, color ):
         elif line=="scale":
             nextLine=lines[indexOfLine+1] ##get arguments
             args=nextLine.split()
+            for a in args:
+                if a.isdigit():
+                    args[args.index(a)]=int(a)
             scale=make_scale(args[0],args[1],args[2])
             matrix_mult(scale,transform)
             i+=2
         elif line=="move":
             nextLine=lines[indexOfLine+1] ##get arguments
             args=nextLine.split()
+            for a in args:
+                if a.isdigit():
+                    args[args.index(a)]=int(a)
             tr=make_translate(args[0],args[1],args[2])
             matrix_mult(tr,transform)
             i+=2
         elif line=="rotate":
             nextLine=lines[indexOfLine+1] ##get arguments
             args=nextLine.split()
+            for a in args:
+                if a.isdigit():
+                    args[args.index(a)]=int(a)
             ro=new_matrix(4,4)
             axis=args[0]
             angle=args[1]
@@ -80,18 +96,21 @@ def parse_file( fname, points, transform, screen, color ):
             matrix_mult(transform,points)
             i+=1
         elif line=="display":
+            draw_lines(points,screen,color)
             display(screen)
             i+=1
         elif line=="save":
             nextLine=lines[indexOfLine+1] #get file name
             args=nextLine.split()
+            for a in args:
+                if a.isdigit():
+                    args[args.index(a)]=int(a)
             save_extension(screen, args[0])
             i+=2
         elif line=="quit":
             done=True
         else:
             i+=1
-    return a
-        
+   
 
 
