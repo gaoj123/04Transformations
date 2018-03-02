@@ -12,7 +12,7 @@ def make_scale( x, y, z ):
     m[0]=[x,0.0,0.0,0.0]
     m[1]=[0.0,y,0.0,0.0]
     m[2]=[0.0,0.0,z,0.0]
-    m[3]=[0.0,0.0,0.0,1]
+    m[3]=[0.0,0.0,0.0,1.0]
     return m
 
 def make_rotX( theta ):
@@ -21,7 +21,7 @@ def make_rotX( theta ):
     rad=math.radians(theta) ##angle in radians
     cosa=math.cos(rad)
     sina=math.sin(rad)
-    m[0]=[1,0.0,0.0,0.0]
+    m[0]=[1.0,0.0,0.0,0.0]
     m[1]=[0.0,cosa,sina,0.0]
     m[2]=[0.0,sina*-1,cosa,0.0]
     m[3]=[0.0,0.0,0.0,1.0]
@@ -47,7 +47,7 @@ def make_rotZ( theta ):
     sina=math.sin(rad)
     m[0]=[cosa,sina,0.0,0.0]
     m[1]=[sina*-1,cosa,0.0,0.0]
-    m[2]=[0.0,0.0,1,0.0]
+    m[2]=[0.0,0.0,1.0,0.0]
     m[3]=[0.0,0.0,0.0,1.0]
     return m
 

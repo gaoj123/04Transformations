@@ -32,13 +32,66 @@ The file follows the following format:
 See the file script for an example of the file format
 """
 def parse_file( fname, points, transform, screen, color ):
+    done=False
     f=open(fname,"r")
     lines=f.readlines()
-    for line in lines:
-        indexOfLine=lines.index(line)
+    i=0
+    while i<len(lines):
+        if done==True:
+            break
+        indexOfLine=i
+        line=lines[i].strip("\n")
+        #indexOfLine=lines.index(line)
         if line=="line":
-            nextLine=lines[indexOfLine+1]
-            args=nextLine.split()
+            nextLine=lines[indexOfLine+1] ##get arguments
+            args=nextLine.split()  ##split arguments by space
             add_edge(points,args[0],args[1],args[2],args[3],args[4],args[5])
+            i+=2
+        elif line=="ident":
+            ident(transform) ##turns transform matrix into identity matrix
+            i+=1
+        elif line=="scale":
+            nextLine=lines[indexOfLine+1] ##get arguments
+            args=nextLine.split()
+            scale=make_scale(args[0],args[1],args[2])
+            matrix_mult(scale,transform)
+            i+=2
+        elif line=="move":
+            nextLine=lines[indexOfLine+1] ##get arguments
+            args=nextLine.split()
+            tr=make_translate(args[0],args[1],args[2])
+            matrix_mult(tr,transform)
+            i+=2
+        elif line=="rotate":
+            nextLine=lines[indexOfLine+1] ##get arguments
+            args=nextLine.split()
+            ro=new_matrix(4,4)
+            axis=args[0]
+            angle=args[1]
+            if axis=="x":
+                ro=make_rotX(angle)
+            elif axis=="y":
+                ro=make_rotY(angle)
+            else:
+                ro=make_rotZ(angle)
+            matrix_mult(ro,transform)
+            i+=2
+        elif line=="apply":
+            matrix_mult(transform,points)
+            i+=1
+        elif line=="display":
+            display(screen)
+            i+=1
+        elif line=="save":
+            nextLine=lines[indexOfLine+1] #get file name
+            args=nextLine.split()
+            save_extension(screen, args[0])
+            i+=2
+        elif line=="quit":
+            done=True
+        else:
+            i+=1
+    return a
+        
 
-#p("script")
+
