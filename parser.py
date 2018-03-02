@@ -56,6 +56,7 @@ def parse_file( fname, points, transform, screen, color ):
             i+=2
         elif line=="ident":
             ident(transform) ##turns transform matrix into identity matrix
+            clear_screen(screen)
             i+=1
         elif line=="scale":
             nextLine=lines[indexOfLine+1] ##get arguments
