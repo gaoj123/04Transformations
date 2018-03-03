@@ -31,6 +31,7 @@ The file follows the following format:
 
 See the file script for an example of the file format
 """
+
 def parse_file( fname, points, transform, screen, color ):
     done=False
     f=open(fname,"r")
@@ -42,10 +43,7 @@ def parse_file( fname, points, transform, screen, color ):
         indexOfLine=i
         for l in lines:
             lines[lines.index(l)]=l.strip("\n")
-        #print lines
         line=lines[i]
-        #line=lines[i].strip("\n")
-        #indexOfLine=lines.index(line)
         if line=="line":
             nextLine=lines[indexOfLine+1] ##get arguments
             args=nextLine.split()  ##split arguments by space
@@ -101,11 +99,9 @@ def parse_file( fname, points, transform, screen, color ):
             display(screen)
             i+=1
         elif line=="save":
+            draw_lines(points,screen,color)
             nextLine=lines[indexOfLine+1] #get file name
             args=nextLine.split()
-            for a in args:
-                if a.isdigit():
-                    args[args.index(a)]=int(a)
             save_extension(screen, args[0])
             i+=2
         elif line=="quit":
@@ -113,5 +109,4 @@ def parse_file( fname, points, transform, screen, color ):
         else:
             i+=1
    
-
 
